@@ -1,10 +1,12 @@
 {{> layout/header}}
 
 <section>
-    <form acton="/board/{{model.id}}/delete" method="post">
+    <form action="/board/{{model.id}}/delete" method="post">
         <button type="submit">삭제</button>
     </form>
-    <a href="/board/{{model.id}}/update_form">수정하기</a>
+    <form action="/board/{{model.id}}/update-form" method="get">
+        <button type="submit">수정</button>
+    </form>
     <div>
         id : {{model.id}} <br>
         제목 : {{model.title}} <br>

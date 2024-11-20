@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.data.annotation.CreatedDate;
 
 import java.sql.Timestamp;
 
@@ -17,12 +16,9 @@ import java.sql.Timestamp;
 public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String title;
     private String content;
     @CreationTimestamp
     private Timestamp createdAt;
-
-    public Board(Integer o, String title, String content, Object createdAt) {
-    }
 }

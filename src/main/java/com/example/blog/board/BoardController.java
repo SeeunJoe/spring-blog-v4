@@ -18,22 +18,37 @@ public class BoardController {
 
     private final BoardService boardService;
 
+    @PostMapping("/board/{id}/update")
+    public String update(@PathVariable("id") int id, BoardRequest.UpdateDTO updateDTO) {
+        boardService.게시글수정하기(id, updateDTO);
+
+        return "redirect:/board/" + id;
+    }
+
     @PostMapping("/board/{id}/delete")
     public String delete(@PathVariable("id") int id) {
         boardService.게시글삭제(id);
         return "redirect:/";
     }
 
-    @GetMapping("/save-form")
+    @GetMapping("/board/save-form")
     public String saveForm() {
         return "save-form";
     }
 
+    @GetMapping("/board/{id}/update-form")
+    public String updateForm(@PathVariable("id") int id, Model model) {
+        BoardResponse.UpdateFormDTO updateFormDTO = boardService.게시글수정화면보기(id);
+        model.addAttribute("model", updateFormDTO);
+        return "update-form";
+    }
+
     @PostMapping("/board/save")
-    public String save(BoardRequest.SaveDTO saveDTO){
+    public String save(BoardRequest.SaveDTO saveDTO) {
         boardService.게시글쓰기(saveDTO);
         return "redirect:/";
     }
+
 
     @GetMapping("/board/{id}")
     public String detail(@PathVariable("id") int id, Model model) {

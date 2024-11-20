@@ -1,10 +1,10 @@
 {{> layout/header}}
 
 <section>
-    <form acton="/board/{{model.id}}/update" method="post" enctype="application/x-www-form-urlencoded">
+    <form action="/board/{{model.id}}/update" method="post" enctype="application/x-www-form-urlencoded">
         id : <input type="text" name="id" value="{{model.id}}" readonly="true"> <br>
-        제목 : <input type="text" value="{{model.title}}"> <br>
-        내용 : <input type="text" value="{{model.content}}"> <br>
+        제목 : <input type="text" name="title" value="{{model.title}}"> <br>
+        내용 : <input type="text" name="content" value="{{model.content}}"> <br>
         작성일 : <input type="text" value="{{model.createdAt}}" readonly="true"> <br>
         <button type="submit">글수정하기</button>
     </form>
