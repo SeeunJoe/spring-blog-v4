@@ -1,9 +1,13 @@
 package com.example.blog.board;
 
+import com.example.blog._core.error.ex.Exception404;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,8 +23,18 @@ public class BoardController {
     private final BoardService boardService;
 
     @PostMapping("/board/{id}/update")
-    public String update(@PathVariable("id") int id, BoardRequest.UpdateDTO updateDTO) {
+    public String update(@PathVariable("id") int id, @Valid BoardRequest.UpdateDTO updateDTO, Errors errors) {
+
+
+        if(errors.hasErrors()) {
+            String errMsg = errors.getFieldErrors().get(0).getField() + ": " + errors.getFieldErrors().get(0).getDefaultMessage();
+            throw new Exception404(errMsg);
+        }
         boardService.게시글수정하기(id, updateDTO);
+
+        if(errors.hasErrors()) {
+            if(errors.hasErrors()) {}
+        }
 
         return "redirect:/board/" + id;
     }
@@ -44,7 +58,17 @@ public class BoardController {
     }
 
     @PostMapping("/board/save")
-    public String save(BoardRequest.SaveDTO saveDTO) {
+    public String save(@Valid BoardRequest.SaveDTO saveDTO, Errors errors) {
+        //유효성검사
+//        if(saveDTO.getTitle().isBlank()){
+//            throw new RuntimeException("title에 공백 혹은 nulll이 들어갈 수 없습니다.");
+//        }
+
+/*        if(errors.hasErrors()) {
+            String errMsg = errors.getFieldErrors().get(0).getField() + ": " + errors.getFieldErrors().get(0).getDefaultMessage();
+            throw new Exception404(errMsg);
+        }*/
+
         boardService.게시글쓰기(saveDTO);
         return "redirect:/";
     }
