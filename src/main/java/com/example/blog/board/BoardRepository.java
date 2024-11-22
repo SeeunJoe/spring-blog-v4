@@ -15,14 +15,7 @@ public class BoardRepository {
     // JPA는 EntityManager로 DB에 접근한다 (자바에서 DBConnection)
     private final EntityManager em;
 
-    //조회만 하면 업데이트가 알아서 되기 때문에 업데이트 필요없다.
-/*    public void update(int id, String title, String content) {
-        Query q = em.createNativeQuery("update board_tb set title=?, content=? where id=?");
-        q.setParameter(1, title);
-        q.setParameter(2, content);
-        q.setParameter(3, id);
-        q.executeUpdate();
-    }*/
+
 
     public void delete(int id){
 /*        Query q = em.createNativeQuery("delete from board_tb where id=?");
@@ -48,12 +41,8 @@ public class BoardRepository {
                 .getResultList();
     }
 
-/*    public Board findById(int id) {
-        Query q = em.createNativeQuery("select * from board_tb where id = ?", Board.class);
-        q.setParameter(1, id); // 물음표 완성하기 (물음표 순서, 물음표에 바인딩될 변수값)
-        return (Board) q.getSingleResult();
-        }
- */ public Optional<Board> findById(int id) {
+
+     public Optional<Board> findById(int id) {
      return Optional.ofNullable(em.find(Board.class, id));
     }
 }

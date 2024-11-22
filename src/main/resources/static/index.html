@@ -28,38 +28,62 @@
     let root = document.querySelector("#root");
     renderList();
 
-    // 1. saveForm 디자인
-    function renderSaveForm(){
-    clear();
-    let dom = `
-        <form>
-            <input type="text" id="title" placeholder="제목"><br>
-            <input type="text" id="content" placeholder="내용"><br>
-            <button type="button" onclick="sendSave()">글쓰기</button>
-        </form>
-    `;
-    root.innerHTML = dom;
+
+    // 2. list 디자인
+    function renderList(){
+        clear();
+        let dom = `
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>제목</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="list-box">
+
+                </tbody>
+            </table>
+        `;
+        root.innerHTML = dom;
+        sendList();
     }
 
-    function sendSave(){
-        // 1. 사용자 입력값 받기
+    function renderListItem(board){
+        let dom = `
+                <td>${board.id}</td>
+                <td>${board.title}</td>
+                <td><a href="javascript:void(0);" onclick="renderDetail(${board.id})">상세보기</a></td>
+        `;
+        let item = document.createElement("tr");
+        item.innerHTML = dom;
+        return item;
+    }
 
-        // 2. 받은 입력 값 JSON으로 변환
-
+    async function sendList(){
         // 3. API요청
+        let response = await fetch("http://localhost:8080/api");
+        let responseBody = await response.json();
 
         // 4. 응답처리
+        let boards = responseBody.body;
+        let listBox = document.querySelector("#list-box");
+        boards.forEach(board => {
+            let item = renderListItem(board);
+            listBox.append(item);
+        });
     }
 
-    function sendList(){
-        // 1. 사용자 입력값 받기
+    
 
-        // 2. 받은 입력 값 JSON으로 변환
-
-        // 3. API요청
-
-        // 4. 응답처리
+    // function들
+        // 화면 초기화
+    function clear(){
+        root.innerHTML = "";
     }
+
+
 
     function sendDelete(){
         // 1. 사용자 입력값 받기
@@ -81,41 +105,43 @@
         // 4. 응답처리       
     }
 
-    // 2. list 디자인
-    function renderList(){
+    function sendDetail(){
+        // 1. 사용자 입력값 받기
+
+        // 2. 받은 입력 값 JSON으로 변환
+
+        // 3. API요청
+
+        // 4. 응답처리       
+    }
+
+
+    // 1. saveForm 디자인
+    function renderSaveForm(){
         clear();
         let dom = `
-            <table border="1">
-                <thead>
-                    <tr>
-                        <th>번호</th>
-                        <th>제목</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody id="list-box">
-
-                </tbody>
-            </table>
-            <button onclick="renderDetail()">상세보기테스트</button>
+            <form>
+                <input type="text" id="title" placeholder="제목"><br>
+                <input type="text" id="content" placeholder="내용"><br>
+                <button type="button" onclick="sendSave()">글쓰기</button>
+            </form>
         `;
         root.innerHTML = dom;
-        sendList();
+        }
+
+
+    function sendSave(){
+        // 1. 사용자 입력값 받기
+
+        // 2. 받은 입력 값 JSON으로 변환
+
+        // 3. API요청
+
+        // 4. 응답처리
     }
 
-    function renderListItem(){
-        let dom = `
-            <tr>
-                <td>1</td>
-                <td>제목1</td>
-                <td><a href="javascript:void(0);" onclick="renderDetail()">상세보기</a></td>
-            </tr>
-        `;
-        return dom;
-    }
 
-
-    // update 디자인
+    // 3. update 디자인
     function renderUpdateForm(){
         clear();
         let dom = `
@@ -130,8 +156,8 @@
         root.innerHTML = dom;
     }
 
-    // detail 디자인
-    function renderDetail(){
+    // 4. detail 디자인
+    async function renderDetail(id){
         clear();
         let dom = `
             <form>
@@ -151,10 +177,6 @@
     }
 
 
-    // 화면 초기화
-    function clear(){
-        root.innerHTML = "";
-    }
 </script>
 
 </body>
