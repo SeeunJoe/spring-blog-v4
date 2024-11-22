@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>blog</title>
+</head>
+<body>
+<nav>
+    <ul>
+        <li>
+            <a href="javascript:void(0);" onclick="renderList()">홈</a>
+        </li>
+        <li>
+            <a href="javascript:void(0);" onclick="renderSaveForm()">글쓰기</a>
+        </li>
+    </ul>
+</nav>
+
+<hr>
+
+<section id="root">
+
+</section>
+
+<script>
+    // init
+    let root = document.querySelector("#root");
+    renderList();
+
+    // 1. saveForm 디자인
+    function renderSaveForm(){
+    clear();
+    let dom = `
+        <form>
+            <input type="text" id="title" placeholder="제목"><br>
+            <input type="text" id="content" placeholder="내용"><br>
+            <button type="button" onclick="sendSave()">글쓰기</button>
+        </form>
+    `;
+    root.innerHTML = dom;
+    }
+
+    function sendSave(){
+        // 1. 사용자 입력값 받기
+
+        // 2. 받은 입력 값 JSON으로 변환
+
+        // 3. API요청
+
+        // 4. 응답처리
+    }
+
+    function sendList(){
+        // 1. 사용자 입력값 받기
+
+        // 2. 받은 입력 값 JSON으로 변환
+
+        // 3. API요청
+
+        // 4. 응답처리
+    }
+
+    function sendDelete(){
+        // 1. 사용자 입력값 받기
+
+        // 2. 받은 입력 값 JSON으로 변환
+
+        // 3. API요청
+
+        // 4. 응답처리       
+    }
+
+    function sendUpdate(){
+        // 1. 사용자 입력값 받기
+
+        // 2. 받은 입력 값 JSON으로 변환
+
+        // 3. API요청
+
+        // 4. 응답처리       
+    }
+
+    // 2. list 디자인
+    function renderList(){
+        clear();
+        let dom = `
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>제목</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="list-box">
+
+                </tbody>
+            </table>
+            <button onclick="renderDetail()">상세보기테스트</button>
+        `;
+        root.innerHTML = dom;
+        sendList();
+    }
+
+    function renderListItem(){
+        let dom = `
+            <tr>
+                <td>1</td>
+                <td>제목1</td>
+                <td><a href="javascript:void(0);" onclick="renderDetail()">상세보기</a></td>
+            </tr>
+        `;
+        return dom;
+    }
+
+
+    // update 디자인
+    function renderUpdateForm(){
+        clear();
+        let dom = `
+            <form>
+                id : <input type="text" value="1" readonly="true"> <br>
+                제목 : <input type="text" id="title" value="제목1"> <br>
+                내용 : <input type="text" id="content" value="내용1"> <br>
+                작성일 : <input type="text" value="2024.11.22" readonly="true"> <br>
+                <button type="button" onclick="sendUpdate()">글수정하기</button>
+            </form>
+        `;
+        root.innerHTML = dom;
+    }
+
+    // detail 디자인
+    function renderDetail(){
+        clear();
+        let dom = `
+            <form>
+                <button type="button" onclick="sendDelete()">삭제</button>
+            </form>
+            <form>
+                <button type="button" onclick="renderUpdateForm()">수정</button>
+            </form>
+            <div>
+                id : 1 <br>
+                제목 : 제목1<br>
+                내용 : 내용1 <br>
+                작성일 : 2024.11.22 <br>
+            </div>
+        `;
+        root.innerHTML = dom;
+    }
+
+
+    // 화면 초기화
+    function clear(){
+        root.innerHTML = "";
+    }
+</script>
+
+</body>
+</html>

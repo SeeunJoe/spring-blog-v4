@@ -17,7 +17,7 @@ public class MyValidationAspect {
 
 
     // 행위
-/*    @Before("@annotation(org.springframework.web.bind.annotation.PostMapping)") //포인트컷 자리
+    @Before("@annotation(org.springframework.web.bind.annotation.PostMapping)") //포인트컷 자리
     public void validationCheck(JoinPoint jp) { //joinPoint에 필요한 정보가 다 담겨져있어
         //jp.getArgs(); // 매개변수들... -> reflection과 같다
         Object[] args = jp.getArgs();
@@ -32,7 +32,7 @@ public class MyValidationAspect {
                 }
             }
         }
-    }*/
+    }
     @Around("@annotation(org.springframework.web.bind.annotation.PostMapping)") //포인트컷 자리
     public Object validationCheck(ProceedingJoinPoint jp) throws Throwable { //joinPoint에 필요한 정보가 다 담겨져있어
         //jp.getArgs(); // 매개변수들... -> reflection과 같다
